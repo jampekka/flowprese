@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<style>
+
+.step {
+	position: relative;
+	width: 1800px;
+	height: 1000px;
+	padding: 40px;
+	margin: 20px auto;
+	box-sizing: border-box;
+
+	font-size: 32px;
+	line-height: 1.5;
+	
+	background-repeat: no-repeat;
+	background-size: 100%;
+
+	font-weight: bold;
+	background-size: 100%;
+	text-shadow:
+    		-1px -1px 0 white,
+		1px -1px 0 white,
+		-1px  1px 0 white,
+	 	1px  1px 0 white;
+}
+
+/*.step:after {
+	content: "";
+	background-image: radial-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+	position: absolute;
+	width: 2000px;
+	height: 2000px;
+	top: -50%;
+	left: -50%;
+	display: block;
+	transform: rotateX(-90deg);
+}*/
+
+.title {
+	background-image: url("flow_cool.png");
+
+}
+
+.gazeflow {
+	background-image: url("flow_cool.png");
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div id="impress">
+<div class="step slide title" data-x=0 data-y=0 data-rotate-y=0>
+	<h1>Optic flow of ground plane during curvilinear locomotion</h1>
+	<h2>Jami Pekkanen, PAC lab, University of Leeds</h2>
+</div>
+
+<div class="step slide">
+	<h1>TL:DL</h1>
+	<ul>
+		<li>Nice equations connecting optic flow and kinematics (speed and yawrate)
+		<li>Human eye seems to follow the optic flow field
+			<ul><li>During (simulated) driving at least</ul>
+		<li>Kinematics can be estimated from eye movements
+		<li>Eye movements can be estimated from kinematics
+</div>
+
+<div class="step slide">
+	<h1>So what is optic flow?</h1>
+	<ul>
+		<li>When you move, the world moves against you
+		<li>Visual optic flow is the visual motion pattern caused by the world moving
+		<li>The world's movement can be deciphered from the visual motion
+	</ul>
+</div>
+
+<div class="step slide">
+	<h1>Curvilinear locomotion</h1>
+	<ul>
+		<li>Always going forwards
+		<li>But changing what forwards is by rotating
+		<li>For now, assume that this happens on a plane
+	</ul>
+</div>
+
+<div class="step slide">
+	<h1>Optic flow during planar curvilinear locomotion</h1>
+	<ul>
+		<li>Angular motion of points on the plane
+		<li>Now we know that in general
+	</ul>
+		$$\left[\begin{matrix}F_{h}\\F_{v}\end{matrix}\right] = \left[\begin{matrix}h_{o}^{2} \cdot yawrate + yawrate - \frac{h_{o} \cdot speed \cdot v_{o}}{eyeheight}\\\frac{v_{o} \cdot \left(eyeheight \cdot h_{o} \cdot yawrate - speed \cdot v_{o}\right)}{eyeheight}\end{matrix}\right]$$
+</div>
+
+<div class="step slide gazeflow">
+	<h1>Gaze follows the optic flow (approximately)</h1>
+	<ul>
+	<li>TODO: Imagine gaze paths overlaid on the flow picture
+	</ul>
+</div>
+
+<div class="step slide">
+	<h1>So what?</h1>
+	<ul>
+	<li>Can estimate speed and yawrate from gaze and eyeheight
+	<li>Can estimate gaze from speed, yawrate and eyeheight
+	<li>Can estimate gaze position from gaze movement, speed, yawrate and eyeheight
+	<li>etc
+	</ul>
+	<img src="pred_gaze.png" style="height: 500px;">
+	<img src="pred_yr.png" style="height: 500px;">
+</div>
+
+<div class="step slide">
+	<h1>The pits of madness</h1>
+	<ul>
+	<li>What really is flow
+	<li>What really is optic flow
+	<li>Is optic flow sensed from retinal flow and how
+	<li>How the eye knows how to follow the optic flow
+	</ul>
+</div>
+
+<!--
+<div class="step slide">
+	<h1>Sensory flow in general</h1>
+	<ul>
+		<li>Change in sensory input over time
+		<li>Not specific to any modality
+			<ul>
+				<li>Haptic flow (e.g. slide finger over texture)
+				<li>Auditory flow (e.g. sound gets louder moving closer)
+				<li>Olfactory flow (in snakes at least!)
+				<li>...
+			</ul>
+		<li>Almost all study on visual flow
+	</ul>
+</div>
+-->
+
+<!--
+<div class="step slide">
+	<h1>Visual optic flow during locomotion</h1>
+</div>
+
+<div class="step slide" data-x=6000 data-y=0 data-z=2000 data-rotate-y=-90>
+	<h1>Perception of motion</h1>
+	<ul>
+		<li>Eye is not a camera
+		<li>Motion can be observed without tracking changes in position
+		<ul>
+			<li>Reichard detectors
+			<li>The waterfall illusion
+		</ul>
+	</ul>
+</div>
+
+<div class="step slide" data-x=8000 data-y=0 data-z=0 data-rotate-y=0>
+	<h1>Optic flow during locomotion</h1>
+</div>
+-->
+
+<!--<div class="step slide" data-y=100 data-rotate-x=90 data-rotate-y=0>
+	<div class="ground" style="position: relative; width: 10000px; height: 10000px"></div>
+</div>-->
+
+</div>
+</body>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<!--<script src="tex-mml-chtml.js"></script>-->
+<script src="impress.js/js/impress.js"></script>
+<script>
+	function radians(x) {
+		return x/180*Math.PI;
+	}
+	let i = 0;
+	let r = 3000;
+
+	let x = 0;
+	let z = 0;
+	let angle = 0;
+	let dir = -1;
+	for(let el of document.querySelectorAll("#impress > .step")) {
+		x = i*r;
+		z = [0, -r, 0, r][i%4];
+		let y = i*r/4;
+		el.setAttribute("data-x", x);
+		el.setAttribute("data-z", z);
+		el.setAttribute("data-y", i*r/2);
+		el.setAttribute("data-rotate-y", angle);
+		
+		da = 90*dir;
+		angle += da;
+		if(angle >= 0) {
+			dir = -1;
+		}
+
+		if(angle <= -180) {
+			dir = 1;
+		}
+		i += 1;
+
+	}
+	impress().init();
+</script>
+</html>
